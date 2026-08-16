@@ -15,7 +15,7 @@ fn main() {
     FileDescriptor::run(
         &ConfigBuilder::new(
             &[Path::new(&cmd)
-                .join("protos/helloworld/helloworld.proto")
+                .join("proto/helloworld/helloworld.proto")
                 .as_path()],
             None,
             Some(&out_dir.as_path()),
