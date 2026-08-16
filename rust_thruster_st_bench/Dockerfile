@@ -1,10 +1,13 @@
-FROM rust:1.94
+ARG RUST_VERSION=1.97
+FROM rust:${RUST_VERSION} as builder
+
+RUN apt update && apt install -y protobuf-compiler-grpc cmake
+COPY proto /app/proto
+
+FROM builder
 
 WORKDIR /app
 COPY rust_thruster_st_bench /app
-COPY proto /app/proto
-
-RUN apt-get update && apt-get install -y protobuf-compiler
 RUN cargo build --release --locked
 
 ENTRYPOINT ["/app/target/release/helloworld-server"]
